@@ -1,2 +1,3 @@
 # musicatchers-backend
-Projeto Full Stack de site para streaming de músicas, do bootcamp Web Full Stack da escola Labenu
+Estrutura de back-end do Projeto Full Stack do bootcamp da escola Labenu.
+Trata-se de um site para streaming de músicas.
