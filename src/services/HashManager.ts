@@ -1,4 +1,7 @@
 import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export class HashGenerator {
     public hash = (plainText: string) : string => {
@@ -11,3 +14,5 @@ export class HashGenerator {
         return bcrypt.compareSync(plainText, cypherText)
     };
 };
+
+export default new HashGenerator();
