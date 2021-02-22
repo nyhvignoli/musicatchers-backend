@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export class HashGenerator {
+export class HashManager {
     public hash = (plainText: string) : string => {
         const rounds: number = Number(process.env.BCRYPT_COST)
         const salt = bcrypt.genSaltSync(rounds)
@@ -15,4 +15,4 @@ export class HashGenerator {
     };
 };
 
-export default new HashGenerator();
+export default new HashManager();
