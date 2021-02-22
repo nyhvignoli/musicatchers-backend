@@ -1,5 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { AuthData } from '../business/entities/User';
 
 dotenv.config();
 
@@ -28,10 +29,6 @@ export class TokenManager {
             id: payload.id
         };
     };
-};
-
-export interface AuthData {
-    id: string
 };
 
 export default new TokenManager();
