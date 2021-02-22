@@ -8,6 +8,7 @@ export class UserDatabase extends BaseDatabase {
             id: user.id,
             name: user.name,
             email: user.email,
+            nickname: user.nickname,
             password: user.password                
         });
     };
