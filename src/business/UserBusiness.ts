@@ -33,7 +33,7 @@ export class UserBusiness {
                 cypherPassword
             );
 
-            await this.userDatabase.createUser(user);
+            await this.userDatabase.insertUser(user);
 
             const userData: AuthData = { id }
             const token: string = this.tokenManager.generateToken(userData);

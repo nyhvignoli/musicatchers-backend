@@ -21,7 +21,6 @@ export class MySqlSetup extends BaseDatabase {
                     author VARCHAR(255) NOT NULL,
                     date DATE NOT NULL,
                     file VARCHAR(255) NOT NULL,
-                    genre VARCHAR(255) NOT NULL,
                     album VARCHAR(255) NOT NULL,
                     user_id VARCHAR(255) NOT NULL,
                     FOREIGN KEY (user_id) REFERENCES ${BaseDatabase.USER_TABLE}(id)
@@ -31,9 +30,16 @@ export class MySqlSetup extends BaseDatabase {
             await BaseDatabase.connection.raw(`
                 CREATE TABLE IF NOT EXISTS ${BaseDatabase.GENRE_TABLE} (
                     id VARCHAR(255) PRIMARY KEY,
-                    name VARCHAR(255) NOT NULL,
+                    name VARCHAR(255) NOT NULL
+                );
+            `);
+
+            await BaseDatabase.connection.raw(`
+                CREATE TABLE IF NOT EXISTS ${BaseDatabase.MUSIC_GENRE_TABLE} (
                     music_id VARCHAR(255) NOT NULL,
-                    FOREIGN KEY (music_id) REFERENCES ${BaseDatabase.MUSIC_TABLE}(id)
+                    genre_id VARCHAR(255) NOT NULL,
+                    FOREIGN KEY (music_id) REFERENCES ${BaseDatabase.MUSIC_TABLE}(id),
+                    FOREIGN KEY (genre_id) REFERENCES ${BaseDatabase.GENRE_TABLE}(id)
                 );
             `);
 
