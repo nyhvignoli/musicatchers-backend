@@ -2,14 +2,16 @@ import { UserDatabase } from "../data/UserDatabase";
 import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
+import { Validator } from "../services/Validator";
 import { AuthData, SignupInputDTO, User } from "./entities/User";
 
 export class UserBusiness {
     constructor (
+        private validator: Validator,
         private idGenerator: IdGenerator,
         private hashManager: HashManager,
+        private userDatabase: UserDatabase,
         private tokenManager: TokenManager,
-        private userDatabase: UserDatabase
     ) { }
 
     public signup = async (
@@ -17,10 +19,8 @@ export class UserBusiness {
     ): Promise<string> => {
         try {
             const { name, nickname, email, password } = input;
-
-            if ( !name || !nickname || !email || !password ) {
-                throw new Error('Missing inputs');
-            };
+            this.validator.validateEmptyProperties(input);
+            this.validator.validatePassword(password);
 
             const id: string = this.idGenerator.generate();
             const cypherPassword: string = this.hashManager.hash(password);
