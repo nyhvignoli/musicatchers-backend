@@ -3,9 +3,20 @@ import { MySqlError } from "../business/error/MySqlError";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class UserDatabase extends BaseDatabase {
+
+    private static toUserModel = (obj: any): User => {
+        return obj && new User(
+            obj.id,
+            obj.name,
+            obj.nickname,
+            obj.email,
+            obj.password
+        );
+    };
+
     public createUser = async (
         user: User
-    ) : Promise<void> => {
+    ): Promise<void> => {
         try {
             await BaseDatabase.connection(BaseDatabase.USER_TABLE)
             .insert({
@@ -16,8 +27,25 @@ export class UserDatabase extends BaseDatabase {
                 password: user.password                
             });
         } catch (error) {
-            const errorInfo = MySqlError.sqlErrorHandler(error.message);
+            const errorInfo = MySqlError.duplicateEntryHandler(error.message);
             throw new MySqlError(errorInfo.statusCode, errorInfo.message);
+        };
+    };
+
+    public selectUserByProperty = async (
+        key: string,
+        value: string
+    ): Promise<User> => {
+        try {
+            const result = await BaseDatabase.connection(BaseDatabase.USER_TABLE)
+                .select('*')
+                .where(key, value);
+
+            return UserDatabase.toUserModel(result[0]);
+
+        } catch (error) {
+            console.log(error.message)
+            throw new MySqlError();
         };
     };
 };
