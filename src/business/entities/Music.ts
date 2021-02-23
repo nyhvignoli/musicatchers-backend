@@ -10,13 +10,16 @@ export class Music {
         public readonly userId: string
     ) { }
 
-    public getGenre() {
-        return this.genre;
-    };
-
-    public setGenre(genre: Genre[]) {
+    public getGenre = () => this.genre;
+    
+    public setGenre = (genre: Genre[]) => {
         this.genre = genre;
     };
+};
+
+export interface Genre {
+    id: string,
+    name: string
 };
 
 export interface MusicInputDTO {
@@ -27,7 +30,13 @@ export interface MusicInputDTO {
     album: string
 };
 
-export interface Genre {
+export interface MusicOutputDTO {
     id: string,
-    name: string
+    title: string,
+    author: string,
+    createdAt: Date,
+    file: string,
+    genre: string[],
+    album: string,
+    userId: string
 };
