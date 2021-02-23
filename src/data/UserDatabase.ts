@@ -14,7 +14,7 @@ export class UserDatabase extends BaseDatabase {
         );
     };
 
-    public createUser = async (
+    public insertUser = async (
         user: User
     ): Promise<void> => {
         try {
