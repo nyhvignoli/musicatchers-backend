@@ -4,6 +4,7 @@ import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
 import { Validator } from "../services/Validator";
 import { AuthData, SignupInputDTO, User } from "./entities/User";
+import { BaseError } from "./error/BaseError";
 
 export class UserBusiness {
     constructor (
@@ -39,7 +40,7 @@ export class UserBusiness {
 
             return token;
         } catch (error) {
-            throw new Error(error.message);
+            throw new BaseError(error.statusCode, error.message);
         };
     };
 };
