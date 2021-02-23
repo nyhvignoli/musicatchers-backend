@@ -2,7 +2,7 @@ import { MusicDatabase } from "../data/MusicDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
 import { Validator } from "../services/Validator";
-import { Genre, Music, MusicInputDTO } from "./entities/Music";
+import { Genre, Music, MusicInputDTO, MusicOutputDTO } from "./entities/Music";
 import { AuthData } from "./entities/User";
 import { BaseError } from "./error/BaseError";
 
@@ -45,6 +45,38 @@ export class MusicBusiness {
 
             await this.musicDatabase.insertMusic(music);
             return music;
+
+        } catch (error) {
+            throw new BaseError(error.statusCode, error.message);
+        };
+    };
+
+    public getMusics = async (
+        token: string
+    ): Promise<MusicOutputDTO[]> => {
+        try {
+            const userData: AuthData = this.tokenManager.getTokenData(token);
+            const musics = await this.musicDatabase.selectMusicsByUser(userData.id);
+
+            if (!musics) {
+                throw new BaseError(404, "Musics not found");
+            };
+
+            const musicsOutputDTO = musics.map((music) => {
+                const genres = music.getGenre().map(genre => genre.name);
+                return {
+                    id: music.id,
+                    title: music.title,
+                    author: music.author,
+                    createdAt: music.date,
+                    file: music.file,
+                    genre: genres,
+                    album: music.album,
+                    userId: music.userId,
+                };
+            });
+            
+            return musicsOutputDTO;
 
         } catch (error) {
             throw new BaseError(error.statusCode, error.message);
