@@ -82,4 +82,23 @@ export class MusicBusiness {
             throw new BaseError(error.statusCode, error.message);
         };
     };
+
+    public getMusicById = async (
+        token: string,
+        id: string
+    ): Promise<Music> => {
+        try {
+            this.tokenManager.getTokenData(token);
+            const music: Music = await this.musicDatabase.selectMusicById(id);
+
+            if (!music) {
+                throw new BaseError(404, "Music not found");
+            };
+
+            return music;
+
+        } catch (error) {
+            throw new BaseError(error.statusCode, error.message);
+        };
+    };
 };
