@@ -73,6 +73,7 @@ export class MusicDatabase extends BaseDatabase {
                 `);
 
                 const genres: Genre[] = [];
+                
                 for (let genre of genreResult[0]) {
                     genres.push({ 
                         id: genre.id,
@@ -85,6 +86,40 @@ export class MusicDatabase extends BaseDatabase {
             };  
 
             return musics;
+        } catch (error) {
+            throw new MySqlError(500, error.message);
+        };
+    };
+
+    public selectMusicById = async (
+        id: string
+    ): Promise<Music> => {
+        try {
+            const musicResult = await BaseDatabase.connection(BaseDatabase.MUSIC_TABLE)
+                .select('*')
+                .where({ id });
+
+            const genres: Genre[] = [];    
+            
+            const genreResult = await BaseDatabase.connection.raw(`
+                SELECT genre_id as id, name
+                FROM ${BaseDatabase.MUSIC_TABLE}
+                JOIN ${BaseDatabase.MUSIC_GENRE_TABLE}
+                ON ${BaseDatabase.MUSIC_GENRE_TABLE}.music_id = ${BaseDatabase.MUSIC_TABLE}.id
+                JOIN ${BaseDatabase.GENRE_TABLE}
+                ON ${BaseDatabase.GENRE_TABLE}.id = ${BaseDatabase.MUSIC_GENRE_TABLE}.genre_id
+                WHERE ${BaseDatabase.MUSIC_TABLE}.id = '${id}'
+            `);
+
+            for (let genre of genreResult[0]) {
+                genres.push({ 
+                    id: genre.id,
+                    name: genre.name 
+                });
+            };    
+
+            return MusicDatabase.toMusicModel(musicResult[0], genres);
+
         } catch (error) {
             throw new MySqlError(500, error.message);
         };

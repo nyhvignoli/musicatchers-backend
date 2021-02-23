@@ -54,4 +54,21 @@ export class MusicController {
                 .send({ message: error.message });
         };
     };
+
+    public getMusicById = async (
+        req: Request,
+        res: Response
+    ): Promise<void> => {
+        try {
+            const token: string = req.headers.authorization!;
+            const id: string = req.params.id;
+            const result = await musicBusiness.getMusicById(token, id);
+            
+            res.status(200).send(result);
+        } catch (error) {
+            res
+                .status(error.statusCode || 400)
+                .send({ message: error.message });
+        }
+    };
 };
