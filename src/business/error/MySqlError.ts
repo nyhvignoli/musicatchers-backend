@@ -6,7 +6,7 @@ export class MySqlError extends Error {
         super(message);
     };
 
-    public static sqlErrorHandler = (errorMessage: string) => {
+    public static duplicateEntryHandler = (errorMessage: string) => {
         let message: string = '';
 
         if (errorMessage.toLowerCase().includes('duplicate entry')) {

@@ -3,7 +3,7 @@ import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
 import { Validator } from "../services/Validator";
-import { AuthData, SignupInputDTO, User } from "./entities/User";
+import { AuthData, LoginInputDTO, SignupInputDTO, User } from "./entities/User";
 import { BaseError } from "./error/BaseError";
 
 export class UserBusiness {
@@ -36,6 +36,37 @@ export class UserBusiness {
             await this.userDatabase.createUser(user);
 
             const userData: AuthData = { id }
+            const token: string = this.tokenManager.generateToken(userData);
+
+            return token;
+        } catch (error) {
+            throw new BaseError(error.statusCode, error.message);
+        };
+    };
+
+    public login = async (
+        input: LoginInputDTO
+    ): Promise<string> => {
+        try {
+            const { email, password } = input;
+            this.validator.validateEmptyProperties(input);
+            this.validator.validatePassword(password);
+
+            const user: User = await this.userDatabase.selectUserByProperty("email", email);
+
+            if (!user) {
+                throw new BaseError(404, 'User not found');
+            };
+
+            const passwordIsCorrect: boolean = this.hashManager.compare(
+                password, user.password
+            );
+
+            if (!passwordIsCorrect) {
+                throw new BaseError(401, 'Incorrect password');
+            };
+
+            const userData: AuthData = { id: user.id };
             const token: string = this.tokenManager.generateToken(userData);
 
             return token;
