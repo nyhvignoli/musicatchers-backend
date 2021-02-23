@@ -5,12 +5,14 @@ import { UserDatabase } from '../data/UserDatabase';
 import { HashManager } from '../services/HashManager';
 import { IdGenerator } from '../services/IdGenerator';
 import { TokenManager } from '../services/TokenManager';
+import { Validator } from '../services/Validator';
 
 const userBusiness = new UserBusiness(
+    new Validator(),
     new IdGenerator(),
     new HashManager(),
-    new TokenManager(),
-    new UserDatabase()
+    new UserDatabase(),
+    new TokenManager(),    
 );
 
 export class UserController {
