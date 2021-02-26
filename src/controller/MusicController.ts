@@ -25,7 +25,7 @@ export class MusicController {
                 title: req.body.title,
                 author: req.body.author,
                 file: req.body.file,
-                genre: req.body.genre as string[],
+                genres: req.body.genres as string[],
                 album: req.body.album
             };
 

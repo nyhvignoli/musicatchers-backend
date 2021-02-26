@@ -5,15 +5,15 @@ export class Music {
         public readonly author: string,
         public readonly date: Date,
         public readonly file: string,
-        private genre: Genre[],
+        private genres: Genre[],
         public readonly album: string,
         public readonly userId: string
     ) { }
 
-    public getGenre = () => this.genre;
+    public getGenres = () => this.genres;
     
-    public setGenre = (genre: Genre[]) => {
-        this.genre = genre;
+    public setGenres = (genres: Genre[]) => {
+        this.genres = genres;
     };
 };
 
@@ -26,7 +26,7 @@ export interface MusicInputDTO {
     title: string,
     author: string,
     file: string,
-    genre: string[],
+    genres: string[],
     album: string
 };
 
@@ -36,7 +36,7 @@ export interface MusicOutputDTO {
     author: string,
     createdAt: Date,
     file: string,
-    genre: string[],
+    genres: string[],
     album: string,
     userId: string
 };
