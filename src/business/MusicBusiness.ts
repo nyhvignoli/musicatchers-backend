@@ -11,7 +11,7 @@ export class MusicBusiness {
         private tokenManager: TokenManager,
         private validator: Validator,
         private idGenerator: IdGenerator,
-        private musicDatabase: MusicDatabase        
+        private musicDatabase: MusicDatabase       
     ) { }
 
     public createMusic = async (
