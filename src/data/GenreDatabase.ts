@@ -11,39 +11,29 @@ export class GenreDatabase extends BaseDatabase {
         };
     };
 
-    // public insertMusic = async (
-    //     music: Music
-    // ) => {
-    //     try {
-    //         await BaseDatabase.connection(BaseDatabase.MUSIC_TABLE)
-    //         .insert({
-    //             id: music.id,
-    //             title: music.title,
-    //             author: music.author,
-    //             date: music.date,
-    //             file: music.file,
-    //             album: music.album,
-    //             user_id: music.userId
-    //         });
+    public insertMusicGenres = async (
+        genres: Genre[],
+        musicId: string
+    ): Promise<void> => {
+        try {
+            for (let genre of genres) {
+                await BaseDatabase.connection(BaseDatabase.GENRE_TABLE)
+                .insert({
+                    id: genre.id,
+                    name: genre.name
+                });
 
-    //         for (let genre of music.getGenres()) {
-    //             await BaseDatabase.connection(BaseDatabase.GENRE_TABLE)
-    //             .insert({
-    //                 id: genre.id,
-    //                 name: genre.name
-    //             });
-
-    //             await BaseDatabase.connection(BaseDatabase.MUSIC_GENRE_TABLE)
-    //             .insert({
-    //                 music_id: music.id,
-    //                 genre_id: genre.id
-    //             });
-    //         };
+                await BaseDatabase.connection(BaseDatabase.MUSIC_GENRE_TABLE)
+                .insert({
+                    music_id: musicId,
+                    genre_id: genre.id
+                });
+            };
             
-    //     } catch (error) {
-    //         throw new MySqlError(500, error.message);
-    //     };
-    // };
+        } catch (error) {
+            throw new MySqlError(500, error.message);
+        };
+    };
 
     public selectGenreByMusic = async (
         musicId: string

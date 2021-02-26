@@ -35,19 +35,7 @@ export class MusicDatabase extends BaseDatabase {
                 user_id: music.userId
             });
 
-            for (let genre of music.getGenres()) {
-                await BaseDatabase.connection(BaseDatabase.GENRE_TABLE)
-                .insert({
-                    id: genre.id,
-                    name: genre.name
-                });
-
-                await BaseDatabase.connection(BaseDatabase.MUSIC_GENRE_TABLE)
-                .insert({
-                    music_id: music.id,
-                    genre_id: genre.id
-                });
-            };
+            await this.genreDatabase.insertMusicGenres(music.getGenres(), music.id);
             
         } catch (error) {
             throw new MySqlError(500, error.message);
@@ -58,9 +46,8 @@ export class MusicDatabase extends BaseDatabase {
         userId: string
     ): Promise<Music[]> => {
         try {
-            const musicResult = await BaseDatabase.connection()
+            const musicResult = await BaseDatabase.connection(BaseDatabase.MUSIC_TABLE)
                 .select('*')
-                .from(BaseDatabase.MUSIC_TABLE)
                 .where({ user_id: userId });
 
             const musics: Music[] = []; 
