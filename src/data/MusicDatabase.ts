@@ -32,7 +32,7 @@ export class MusicDatabase extends BaseDatabase {
                 user_id: music.userId
             });
 
-            for (let genre of music.getGenre()) {
+            for (let genre of music.getGenres()) {
                 await BaseDatabase.connection(BaseDatabase.GENRE_TABLE)
                 .insert({
                     id: genre.id,

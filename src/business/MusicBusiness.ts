@@ -20,12 +20,12 @@ export class MusicBusiness {
     ): Promise<Music> => {
         try {
             const userData: AuthData = this.tokenManager.getTokenData(token);
-            const { title, author, file, genre, album } = input;
+            const { title, author, file, genres, album } = input;
             this.validator.validateEmptyProperties(input);
 
             const id: string = this.idGenerator.generate();
             const date: Date = new Date();
-            const genres: Genre[] = genre.map((genre) => {
+            const genresModel: Genre[] = genres.map((genre) => {
                 return {
                     id: this.idGenerator.generate(),
                     name: genre
@@ -38,7 +38,7 @@ export class MusicBusiness {
                 author,
                 date,
                 file,
-                genres,
+                genresModel,
                 album,
                 userData.id
             );
@@ -63,14 +63,14 @@ export class MusicBusiness {
             };
 
             const musicsOutputDTO = musics.map((music) => {
-                const genres = music.getGenre().map(genre => genre.name);
+                const genres = music.getGenres().map(genre => genre.name);
                 return {
                     id: music.id,
                     title: music.title,
                     author: music.author,
                     createdAt: music.date,
                     file: music.file,
-                    genre: genres,
+                    genres: genres,
                     album: music.album,
                     userId: music.userId,
                 };
