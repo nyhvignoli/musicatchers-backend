@@ -35,6 +35,23 @@ export class GenreDatabase extends BaseDatabase {
         };
     };
 
+    public selectAllGenres = async (): Promise<string[]> => {
+        try {
+            const result = await BaseDatabase.connection(BaseDatabase.GENRE_TABLE)
+                .distinct("name");
+
+            const genres: string[] = [];
+
+            for (let genre of result) {
+                result && genres.push(genre.name);
+            };
+            
+            return genres;
+        } catch (error) {
+            throw new MySqlError(500, error.message);
+        };
+    };
+
     public selectGenreByMusic = async (
         musicId: string
     ): Promise<Genre[]> => {

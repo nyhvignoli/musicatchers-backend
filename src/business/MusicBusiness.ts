@@ -1,3 +1,4 @@
+import { GenreDatabase } from "../data/GenreDatabase";
 import { MusicDatabase } from "../data/MusicDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
@@ -97,6 +98,22 @@ export class MusicBusiness {
 
             return music;
 
+        } catch (error) {
+            throw new BaseError(error.statusCode, error.message);
+        };
+    };
+
+    public getAllGenres = async (): Promise<string[]> => {
+        try {
+            const genreDatabase = new GenreDatabase();
+
+            const genres = await genreDatabase.selectAllGenres();
+
+            if (!genres) {
+                throw new BaseError(404,"No genres found");
+            };
+
+            return genres;
         } catch (error) {
             throw new BaseError(error.statusCode, error.message);
         };
