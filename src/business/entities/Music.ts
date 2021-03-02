@@ -22,6 +22,20 @@ export interface Genre {
     name: string
 };
 
+export enum Genres {
+    POP = "Pop",
+    ROCK = "Rock",
+    METAL = "Metal",
+    INDIE = "Indie",
+    ALTERNATIVE = "Alternativo",
+    CLASSIC = "Clássica",
+    MPB = "MPB",
+    RAP = "Rap",
+    FUNK = "Funk",
+    NEW_WAVE = "New Wave",
+    DREAM_POP = "Dream Pop",
+};
+
 export interface MusicInputDTO {
     title: string,
     author: string,
