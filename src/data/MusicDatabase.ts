@@ -64,12 +64,15 @@ export class MusicDatabase extends BaseDatabase {
     };
 
     public selectMusicById = async (
-        id: string
+        id: string,
+        userId: string
     ): Promise<Music> => {
         try {
             const musicResult = await BaseDatabase.connection(BaseDatabase.MUSIC_TABLE)
                 .select('*')
-                .where({ id });
+                .where({ id })
+                .and
+                .where({ user_id: userId });
 
             const genres = await this.genreDatabase.selectGenreByMusic(id);    
 

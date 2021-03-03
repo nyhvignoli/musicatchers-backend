@@ -89,8 +89,8 @@ export class MusicBusiness {
         id: string
     ): Promise<Music> => {
         try {
-            this.tokenManager.getTokenData(token);
-            const music: Music = await this.musicDatabase.selectMusicById(id);
+            const userData: AuthData = this.tokenManager.getTokenData(token);
+            const music: Music = await this.musicDatabase.selectMusicById(id, userData.id);
 
             if (!music) {
                 throw new BaseError(404, "Music not found");
