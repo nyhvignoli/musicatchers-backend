@@ -5,8 +5,9 @@ export class Playlist {
         public readonly id: string,
         public readonly name: string,
         public readonly description: string,
-        public readonly data: Date,
-        private musics: Music[]
+        public readonly date: Date,
+        public readonly userId: string,
+        private musics?: Music[],
     ) { }
 
     public getMusics = () => this.musics;
@@ -14,4 +15,9 @@ export class Playlist {
     public setMusics = (musics: Music[]) => {
         this.musics = musics;
     };
+};
+
+export interface PlaylistInputDTO {
+    name: string,
+    description: string
 };
