@@ -5,3 +5,4 @@ export const playlistRouter = express.Router();
 const playlistController = new PlaylistController();
 
 playlistRouter.put('/', playlistController.createPlaylist);
+playlistRouter.put('/track/:id/:playlistId', playlistController.addTrackToPlaylist);
