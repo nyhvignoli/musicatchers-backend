@@ -9,6 +9,8 @@ export class BaseDatabase {
     protected static MUSIC_TABLE = 'musicatchers_musics';
     protected static GENRE_TABLE = 'musicatchers_genres';
     protected static MUSIC_GENRE_TABLE = 'musicatchers_music_genre';
+    protected static PLAYLIST_TABLE = 'musicatchers_playlists';
+    protected static PLAYLIST_MUSIC_TABLE = 'musicatchers_playlist_music';
 
     protected static connection: Knex = knex({
         client: 'mysql',
