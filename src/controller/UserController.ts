@@ -49,8 +49,8 @@ export class UserController {
             };
 
             const token: string = await userBusiness.login(input);
-            res.status(200).send({ token });
 
+            res.status(200).send({ token });
         } catch (error) {
             res
                 .status(error.statusCode || 400)
@@ -64,7 +64,6 @@ export class UserController {
     ): Promise<void> => {
         try {
             const token: string = req.headers.authorization!;
-
             const result: UserOutputDTO = await userBusiness.getCurrentUser(token);
 
             res.status(200).send(result);
