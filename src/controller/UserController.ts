@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { LoginInputDTO, SignupInputDTO } from '../business/entities/User';
+import { LoginInputDTO, SignupInputDTO, UserOutputDTO } from '../business/entities/User';
 import { UserBusiness } from '../business/UserBusiness';
 import { UserDatabase } from '../data/UserDatabase';
 import { HashManager } from '../services/HashManager';
@@ -17,7 +17,8 @@ const userBusiness = new UserBusiness(
 
 export class UserController {
     public signup = async (
-        req: Request, res: Response
+        req: Request, 
+        res: Response
     ): Promise<void> => {
         try {
             const input: SignupInputDTO = {
@@ -38,7 +39,8 @@ export class UserController {
     };
 
     public login = async (
-        req: Request, res: Response
+        req: Request, 
+        res: Response
     ): Promise<void> => {
         try {
             const input: LoginInputDTO = {
@@ -49,6 +51,23 @@ export class UserController {
             const token: string = await userBusiness.login(input);
             res.status(200).send({ token });
 
+        } catch (error) {
+            res
+                .status(error.statusCode || 400)
+                .send(error.message);
+        };
+    };
+
+    public getCurrentUser = async (
+        req: Request, 
+        res: Response
+    ): Promise<void> => {
+        try {
+            const token: string = req.headers.authorization!;
+
+            const result: UserOutputDTO = await userBusiness.getCurrentUser(token);
+
+            res.status(200).send(result);
         } catch (error) {
             res
                 .status(error.statusCode || 400)
