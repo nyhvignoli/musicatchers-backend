@@ -4,7 +4,11 @@ import { IdGenerator } from "../../src/services/IdGenerator";
 
 describe (`Testing 'login', UserBusiness`, () => {
 
-    let validator = { validateEmptyProperties: jest.fn(), validatePassword: jest.fn() };
+    let validator = { 
+        validateEmptyProperties: jest.fn(), 
+        validatePassword: jest.fn() 
+    };
+    
     let idGenerator = { } as IdGenerator;
     let hashManager = { } as any;
     let userDatabase = { } as any;
