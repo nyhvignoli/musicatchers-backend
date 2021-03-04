@@ -77,4 +77,22 @@ export class PlaylistBusiness {
             throw new BaseError(error.statusCode, error.message);
         };
     };
+
+    public getUserPlaylists = async (
+        token: string
+    ): Promise<Playlist[]> => {
+        try {
+            const userData: AuthData = this.tokenManager.getTokenData(token);
+
+            const playlists = await this.playlistDatabase.selectUserPlaylists(userData.id);
+
+            if (!playlists) {
+                throw new BaseError(404, 'No playlists for this user');
+            };
+
+            return playlists;
+        } catch (error) {
+            throw new BaseError(error.statusCode, error.message);
+        };
+    };
 };

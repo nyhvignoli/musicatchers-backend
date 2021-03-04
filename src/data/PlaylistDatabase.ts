@@ -32,10 +32,31 @@ export class PlaylistDatabase extends BaseDatabase {
         };
     };
 
+    public selectUserPlaylists = async (
+        userId: string
+    ): Promise<Playlist[]> => {
+        try {
+            const result = await BaseDatabase.connection(BaseDatabase.PLAYLIST_TABLE)
+                .select('*')
+                .where({ user_id: userId });
+
+            const playlists: Playlist[] = [];    
+
+            for (let playlist of result) {
+                playlists.push(PlaylistDatabase.toPlaylistModel(playlist));
+            };
+            
+            return playlists;   
+
+        } catch (error) {
+            throw new MySqlError(500, error.message);
+        };
+    };
+
     public selectPlaylistById = async (
         id: string,
         userId: string
-    ) => {
+    ): Promise<Playlist> => {
         try {
             const result = await BaseDatabase.connection(BaseDatabase.PLAYLIST_TABLE)
                 .select('*')
