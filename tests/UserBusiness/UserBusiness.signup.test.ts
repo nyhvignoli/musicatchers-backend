@@ -1,20 +1,10 @@
 import { SignupInputDTO } from "../../src/business/entities/User";
 import { UserBusiness } from "../../src/business/UserBusiness";
-import { HashManager } from "../../src/services/HashManager";
-import { IdGenerator } from "../../src/services/IdGenerator";
-import { TokenManager } from "../../src/services/TokenManager";
-import { Validator } from "../../src/services/Validator";
 
 describe (`Testing 'signup', UserBusiness`, () => {
 
-    let validator = { } as Validator;
-    let idGenerator = { } as IdGenerator;
-    let hashManager = { } as any;
-    let userDatabase = { } as any;
-    let tokenManager = { } as any;
-
     test('Should return access token', async () => {
-        expect.assertions(2);
+        expect.assertions(9);
 
         const input: SignupInputDTO = {
             name: "name",
@@ -23,11 +13,11 @@ describe (`Testing 'signup', UserBusiness`, () => {
             password: "password"
         };
 
-        validator = { validateEmptyProperties: jest.fn(), validatePassword: jest.fn() };
-        idGenerator = { generate: jest.fn(() => 'id') };
-        hashManager = { hash: jest.fn(() => 'hashPassword') };
-        userDatabase = { insertUser: jest.fn() };
-        tokenManager = { generateToken: jest.fn(() => 'token') };
+        const validator = { validateEmptyProperties: jest.fn(), validatePassword: jest.fn() };
+        const idGenerator = { generate: jest.fn(() => 'id') };
+        const hashManager = { hash: jest.fn(() => 'hashPassword') } as any;
+        const userDatabase = { insertUser: jest.fn() } as any;
+        const tokenManager = { generateToken: jest.fn(() => 'token') } as any;
         
         const userBusiness = new UserBusiness(
             validator,
@@ -37,9 +27,16 @@ describe (`Testing 'signup', UserBusiness`, () => {
             tokenManager
         );
 
-        await userBusiness.signup(input);
+        const token = await userBusiness.signup(input);
   
         expect(validator.validateEmptyProperties).toHaveBeenCalled();
         expect(validator.validatePassword).toHaveBeenCalled();
+        expect(idGenerator.generate).toHaveBeenCalled();
+        expect(idGenerator.generate).toHaveReturnedWith('id');
+        expect(hashManager.hash).toHaveBeenCalled();
+        expect(hashManager.hash).toHaveReturnedWith('hashPassword');
+        expect(tokenManager.generateToken).toHaveBeenCalled();
+        expect(tokenManager.generateToken).toHaveReturnedWith('token');
+        expect(token).toBe('token');
     });
 });
