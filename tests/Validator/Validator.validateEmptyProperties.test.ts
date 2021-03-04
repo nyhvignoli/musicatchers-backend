@@ -3,8 +3,6 @@ import { Validator } from "../../src/services/Validator";
 
 describe (`Testing 'validateEmptyProperties', Validator`, () => {
 
-    const validator = new Validator();
-    
     test('Should return 422 error for missing properties', async () => {
         expect.assertions(2);
 
@@ -16,6 +14,7 @@ describe (`Testing 'validateEmptyProperties', Validator`, () => {
         };
 
         try {
+            const validator = new Validator();
             validator.validateEmptyProperties(input);
     
         } catch (error) {
