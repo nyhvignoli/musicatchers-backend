@@ -3,7 +3,7 @@ import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
 import { Validator } from "../services/Validator";
-import { AuthData, LoginInputDTO, SignupInputDTO, User } from "./entities/User";
+import { AuthData, LoginInputDTO, SignupInputDTO, User, UserOutputDTO } from "./entities/User";
 import { BaseError } from "./error/BaseError";
 
 export class UserBusiness {
@@ -70,6 +70,27 @@ export class UserBusiness {
             const token: string = this.tokenManager.generateToken(userData);
 
             return token;
+        } catch (error) {
+            throw new BaseError(error.statusCode, error.message);
+        };
+    };
+
+    public getCurrentUser = async (
+        token: string
+    ): Promise<UserOutputDTO> => {
+        try {
+            const userData: AuthData = this.tokenManager.getTokenData(token);
+            const user: User = await this.userDatabase.selectUserByProperty("id", userData.id);
+
+            const userOutputDTO: UserOutputDTO = {
+                id: user.id,
+                name: user.name,
+                nickname: user.nickname,
+                email: user.email
+            };
+
+            return userOutputDTO;
+
         } catch (error) {
             throw new BaseError(error.statusCode, error.message);
         };
