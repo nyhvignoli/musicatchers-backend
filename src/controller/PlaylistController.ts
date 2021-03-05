@@ -45,8 +45,8 @@ export class PlaylistController {
         try {
             const token: string = req.headers.authorization!;
             const input: AddTrackInputDTO = {
-                id: req.params.id,
-                playlistId: req.params.playlistId
+                musicId: req.body.musicId,
+                playlistId: req.body.playlistId
             };
 
             await playlistBusiness.addTrackToPlaylist(token, input);

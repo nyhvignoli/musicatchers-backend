@@ -72,14 +72,14 @@ export class PlaylistDatabase extends BaseDatabase {
     };
 
     public insertTrackIntoPlaylist = async (
-        id: string,
+        musicId: string,
         playlistId: string
     ) => {
         try {
             await BaseDatabase.connection(BaseDatabase.PLAYLIST_MUSIC_TABLE)
                 .insert({
                     playlist_id: playlistId,
-                    music_id: id
+                    music_id: musicId
                 });
 
         } catch (error) {
