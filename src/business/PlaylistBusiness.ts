@@ -50,11 +50,11 @@ export class PlaylistBusiness {
     ) => {
         try {
             const userData: AuthData = this.tokenManager.getTokenData(token);
-            const { id, playlistId } = input;
+            const { musicId, playlistId } = input;
             this.validator.validateEmptyProperties(input);
 
             const music: Music = await this.musicDatabase.selectMusicById(
-                id,
+                musicId,
                 userData.id
             );
 
@@ -71,8 +71,26 @@ export class PlaylistBusiness {
                 throw new BaseError(404, 'Playlist not found');
             };
 
-            await this.playlistDatabase.insertTrackIntoPlaylist(id, playlistId);
+            await this.playlistDatabase.insertTrackIntoPlaylist(musicId, playlistId);
 
+        } catch (error) {
+            throw new BaseError(error.statusCode, error.message);
+        };
+    };
+
+    public getUserPlaylists = async (
+        token: string
+    ): Promise<Playlist[]> => {
+        try {
+            const userData: AuthData = this.tokenManager.getTokenData(token);
+
+            const playlists = await this.playlistDatabase.selectUserPlaylists(userData.id);
+
+            if (!playlists) {
+                throw new BaseError(404, 'No playlists for this user');
+            };
+
+            return playlists;
         } catch (error) {
             throw new BaseError(error.statusCode, error.message);
         };

@@ -23,6 +23,6 @@ export interface PlaylistInputDTO {
 };
 
 export interface AddTrackInputDTO {
-    id: string,
+    musicId: string,
     playlistId: string
 };
