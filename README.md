@@ -1,18 +1,15 @@
 <a name="languages"></a>
 # MusiCatchers - Backend
-- [Português](#pt-readme)
-- [English](#en-readme)
 
 <a id="pt-readme"></a>
-### PT | [EN](#en-readme)
+### Português | [English](#en-readme)
 Estrutura de back-end do Projeto Full Stack do bootcamp da escola Labenu.
-Trata-se de um site para streaming de músicas.
+Trata-se de uma API com funcionalidades básicas de um site para streaming de músicas.
 
-### Menu
 <a name="pt-menu"></a>
 - [Requisitos Básicos](#requisitos)
 - [Instruções Gerais](#instrucoes)
-- [Scripts](#pt-scripts)
+- [Scripts Disponíveis](#pt-scripts)
 - [Funcionalidades](#funcionalidades)
 - [Bibliotecas e Frameworks](#bibliotecas)
 
@@ -45,16 +42,16 @@ BCRYPT_COST = 12
 ```
 
 <a id="pt-scripts"></a>
-## Scripts:
+## Scripts Disponíveis:
 * `npm run tables` para criar as tabelas.
 * `npm run test` para rodar os cases de teste.
 * `npm run dev` para iniciar a aplicação com hot reload.
 
 <a id="funcionalidades"></a>
-## Funcionalidades
+## Funcionalidades:
 * Cadastro
 * Login
-* Pegar informações da(o) usuária(o) que estiver logada(o).
+* Pegar informações da(o) usuária(o) que estiver logada(o)
 * Criar música
 * Listar todas as músicas
 * Exibir detalhes de uma música específica
@@ -63,7 +60,7 @@ BCRYPT_COST = 12
 * Adicionar música à playlist escolhida
 
 <a id="bibliotecas"></a>
-## Bibliotecas e Frameworks
+## Bibliotecas e Frameworks:
 * cors
 * express
 * knex
@@ -77,12 +74,14 @@ BCRYPT_COST = 12
 ---
 
 <a id="en-readme"></a>
-### EN | [PT](#pt-readme)
+### [Português](#pt-readme) | English
+Back-end structure of the Full Stack Project developed at Labenu School bootcamp.
+An API with basic features of an music streaming website.
 
 <a name="pt-menu"></a>
 - [Minimum Requirements](#requirements)
 - [Instructions](#instructions)
-- [Scripts](#scripts)
+- [Available Scripts](#scripts)
 - [Features](#features)
 - [Libs and Frameworks](#libs)
 
@@ -115,13 +114,13 @@ BCRYPT_COST = 12
 ```
 
 <a id="scripts"></a>
-## Scripts:
+## Available Scripts:
 * `npm run tables` to create tables.
 * `npm run test` to run test cases.
 * `npm run dev` to start the application with hot reload.
 
 <a id="features"></a>
-## Features
+## Features:
 * Signup
 * Login
 * Get current user infos
@@ -133,7 +132,7 @@ BCRYPT_COST = 12
 * Add track to a playlist
 
 <a id="libs"></a>
-## Libs and Frameworks
+## Libs and Frameworks:
 * cors
 * express
 * knex
