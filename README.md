@@ -25,7 +25,7 @@ Trata-se de uma API com funcionalidades básicas de um site para streaming de m�
 * Clone esse repositório no diretório de sua escolha com o comando `git clone <url>`.
 * Abra o projeto na sua IDE favorita.
 * Rode o comando `npm install` **ou** `npm i` para instalar as dependências do projeto.
-* Crie um arquivo `.env` com as suas informações:
+* Crie um arquivo `.env` na pasta raíz do projeto com as suas informações:
 ```
 # Database
 DB_HOST = host do banco de dados
@@ -97,7 +97,7 @@ An API with basic features of an music streaming website.
 * Clone this repository in a directory of your choice running `git clone <url>` command.
 * Open the project on your favorite IDE.
 * Run the `npm install` command **or** `npm i` to install all the dependencies.
-* Create a `.env` file with your environment variables:
+* On the root directory of the project, create a `.env` file with your environment variables:
 ```
 # Database
 DB_HOST = database host
