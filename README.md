@@ -58,6 +58,7 @@ BCRYPT_COST = 12
 * Listar todos os generos musicais
 * Criar playlist
 * Adicionar música à playlist escolhida
+* Listar todas as músicas da playlist escolhida
 
 <a id="bibliotecas"></a>
 ## Bibliotecas e Frameworks:
@@ -130,6 +131,7 @@ BCRYPT_COST = 12
 * Get all music genres
 * Create playlist
 * Add track to a playlist
+* Display all tracks of an especific playlist
 
 <a id="libs"></a>
 ## Libs and Frameworks:
