@@ -43,6 +43,26 @@ export class MySqlSetup extends BaseDatabase {
                 );
             `);
 
+            await BaseDatabase.connection.raw(`
+                CREATE TABLE IF NOT EXISTS ${BaseDatabase.PLAYLIST_TABLE} (
+                    id VARCHAR(255) PRIMARY KEY,
+                    name VARCHAR(255) NOT NULL UNIQUE,
+                    description VARCHAR(255) NOT NULL,
+                    date DATE NOT NULL,
+                    user_id VARCHAR(255) NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES ${BaseDatabase.USER_TABLE}(id)
+                );
+            `);
+
+            await BaseDatabase.connection.raw(`
+                CREATE TABLE IF NOT EXISTS ${BaseDatabase.PLAYLIST_MUSIC_TABLE} (
+                    playlist_id VARCHAR(255) NOT NULL,
+                    music_id VARCHAR(255) NOT NULL,
+                    FOREIGN KEY (playlist_id) REFERENCES ${BaseDatabase.PLAYLIST_TABLE}(id),
+                    FOREIGN KEY (music_id) REFERENCES ${BaseDatabase.MUSIC_TABLE}(id)
+                );
+            `);
+
             console.log('MySQL setup completed!');
         } catch (error) {
             console.log(error.message);
