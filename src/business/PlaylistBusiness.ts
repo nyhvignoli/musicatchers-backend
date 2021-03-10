@@ -3,7 +3,7 @@ import { PlaylistDatabase } from "../data/PlaylistDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
 import { Validator } from "../services/Validator";
-import { Music } from "./entities/Music";
+import { Music, MusicOutputDTO } from "./entities/Music";
 import { AddTrackInputDTO, Playlist, PlaylistInputDTO } from "./entities/Playlist";
 import { AuthData } from "./entities/User";
 import { BaseError } from "./error/BaseError";
@@ -91,6 +91,24 @@ export class PlaylistBusiness {
             };
 
             return playlists;
+        } catch (error) {
+            throw new BaseError(error.statusCode, error.message);
+        };
+    };
+
+    public getPlaylistTracks = async (
+        token: string,
+        playlistId: string
+    ): Promise<MusicOutputDTO[]> => {
+        try {
+            const userData: AuthData = this.tokenManager.getTokenData(token);
+            const musics = await this.playlistDatabase.selectPlaylistTracks(playlistId, userData.id);
+
+            if (!musics) {
+                throw new BaseError(404, 'No musics in this playlist');
+            };
+
+            return musics;
         } catch (error) {
             throw new BaseError(error.statusCode, error.message);
         };

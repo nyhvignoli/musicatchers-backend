@@ -1,3 +1,4 @@
+import { MusicOutputDTO } from "../business/entities/Music";
 import { Playlist } from "../business/entities/Playlist";
 import { MySqlError } from "../business/error/MySqlError";
 import { BaseDatabase } from "./BaseDatabase";
@@ -14,6 +15,15 @@ export class PlaylistDatabase extends BaseDatabase {
         );
     };
 
+    public static toMusicOutputDTO = (music: any): MusicOutputDTO => {
+        return music && {
+            id: music.id,
+            title: music.title,
+            author: music.author,
+            createdAt: music.date
+        };
+    };
+
     public insertPlaylist = async (
         playlist: Playlist
     ) => {
@@ -23,7 +33,7 @@ export class PlaylistDatabase extends BaseDatabase {
                     id: playlist.id,
                     name: playlist.name,
                     description: playlist.description,
-                    date: playlist.date,
+                    date: playlist.createdAt,
                     user_id: playlist.userId
                 });
 
@@ -74,13 +84,38 @@ export class PlaylistDatabase extends BaseDatabase {
     public insertTrackIntoPlaylist = async (
         musicId: string,
         playlistId: string
-    ) => {
+    ): Promise<void> => {
         try {
             await BaseDatabase.connection(BaseDatabase.PLAYLIST_MUSIC_TABLE)
                 .insert({
                     playlist_id: playlistId,
                     music_id: musicId
                 });
+
+        } catch (error) {
+            throw new MySqlError(500, error.message);
+        };
+    };
+
+    public selectPlaylistTracks = async (
+        playlistId: string,
+        userId: string
+    ) => {
+        try {
+            const result = await BaseDatabase.connection(BaseDatabase.MUSIC_TABLE)
+                .join(`${BaseDatabase.PLAYLIST_MUSIC_TABLE}`, 'music_id', 'id' )
+                .select('id', 'title', 'author', 'date')
+                .where({ playlist_id: playlistId })
+                .and
+                .where({user_id: userId });
+
+            const musics: MusicOutputDTO[] = [];  
+
+            for (let music of result) {
+                musics.push(PlaylistDatabase.toMusicOutputDTO(music))
+            };
+
+            return musics;   
 
         } catch (error) {
             throw new MySqlError(500, error.message);

@@ -74,4 +74,21 @@ export class PlaylistController {
                 .send(error.message);
         };
     };
+
+    public getPlaylistTracks = async (
+        req: Request,
+        res: Response
+    ): Promise<void> => {
+        try {
+            const token: string = req.headers.authorization!;
+            const id: string = req.params.playlistId as string;
+            const result = await playlistBusiness.getPlaylistTracks(token, id);
+
+            res.status(200).send(result);
+        } catch (error) {
+            res
+                .status(error.statusCode || 400)
+                .send(error.message);
+        };
+    };
 };

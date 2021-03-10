@@ -17,7 +17,7 @@ export class MusicDatabase extends BaseDatabase {
             genres,
             music.album,
             music.user_id
-        );
+        )
     };
 
     public insertMusic = async (
@@ -29,7 +29,7 @@ export class MusicDatabase extends BaseDatabase {
                 id: music.id,
                 title: music.title,
                 author: music.author,
-                date: music.date,
+                date: music.createdAt,
                 file: music.file,
                 album: music.album,
                 user_id: music.userId

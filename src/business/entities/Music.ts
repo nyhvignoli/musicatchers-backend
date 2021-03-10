@@ -3,7 +3,7 @@ export class Music {
         public readonly id: string,
         public readonly title: string,
         public readonly author: string,
-        public readonly date: Date,
+        public readonly createdAt: Date,
         public readonly file: string,
         private genres: Genre[],
         public readonly album: string,
@@ -49,8 +49,8 @@ export interface MusicOutputDTO {
     title: string,
     author: string,
     createdAt: Date,
-    file: string,
-    genres: string[],
-    album: string,
-    userId: string
+    file?: string,
+    genres?: string[],
+    album?: string,
+    userId?: string
 };
