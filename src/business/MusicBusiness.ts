@@ -69,7 +69,7 @@ export class MusicBusiness {
                     id: music.id,
                     title: music.title,
                     author: music.author,
-                    createdAt: music.date,
+                    createdAt: music.createdAt,
                     file: music.file,
                     genres: genres,
                     album: music.album,
