@@ -12,7 +12,6 @@ Trata-se de uma API com funcionalidades básicas de um site para streaming de m�
 - [Scripts Disponíveis](#pt-scripts)
 - [Funcionalidades](#funcionalidades)
 - [Bibliotecas e Frameworks](#bibliotecas)
-- <link href="https://documenter.getpostman.com/view/13242412/Tz5p6dMa" target="_blank">Documentação</link>
 - [Documentação](https://documenter.getpostman.com/view/13242412/Tz5p6dMa)
 
 <a id="requisitos"></a>
