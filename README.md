@@ -61,7 +61,7 @@ BCRYPT_COST = 12
 * Adicionar música à playlist escolhida
 * Listar todas as músicas da playlist escolhida
 
-Visite [MusiCatchers - Documentação](https://documenter.getpostman.com/view/13242412/Tz5p6dMa) para ver exemplos de requisições.
+Visite [MusiCatchers API](https://documenter.getpostman.com/view/13242412/Tz5p6dMa) para ver exemplos de requisições.
 
 <a id="bibliotecas"></a>
 ## Bibliotecas e Frameworks:
@@ -137,7 +137,7 @@ BCRYPT_COST = 12
 * Add track to a playlist
 * Display all tracks of an especific playlist
 
-Check out the [MusiCatchers - Documentation](https://documenter.getpostman.com/view/13242412/Tz5p6dMa) for requests examples.
+Check out the [MusiCatchers API](https://documenter.getpostman.com/view/13242412/Tz5p6dMa) for requests examples.
 
 <a id="libs"></a>
 ## Libs and Frameworks:
