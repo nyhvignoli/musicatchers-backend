@@ -45,6 +45,7 @@ BCRYPT_COST = 12
 <a id="pt-scripts"></a>
 ## Scripts Disponíveis:
 * `npm run tables` para criar as tabelas.
+* `npm run populate` para popular a tabela de gêneros musicais.
 * `npm run test` para rodar os cases de teste.
 * `npm run dev` para iniciar a aplicação com hot reload.
 
@@ -121,6 +122,7 @@ BCRYPT_COST = 12
 <a id="scripts"></a>
 ## Available Scripts:
 * `npm run tables` to create tables.
+* `npm run populate` to populate the music genre table.
 * `npm run test` to run test cases.
 * `npm run dev` to start the application with hot reload.
 

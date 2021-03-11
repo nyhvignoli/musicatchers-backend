@@ -1,4 +1,4 @@
-import { Genre, Music } from "../business/entities/Music";
+import { Genre } from "../business/entities/Music";
 import { MySqlError } from "../business/error/MySqlError";
 import { BaseDatabase } from "./BaseDatabase";
 

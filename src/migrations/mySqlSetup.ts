@@ -63,7 +63,7 @@ export class MySqlSetup extends BaseDatabase {
                 );
             `);
 
-            console.log('MySQL setup completed!');
+            console.log(`MySQL setup completed! Run 'npm run populate' to populate the Genre Table`);
         } catch (error) {
             console.log(error.message);
         } finally {
