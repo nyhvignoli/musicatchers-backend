@@ -12,6 +12,7 @@ Trata-se de uma API com funcionalidades básicas de um site para streaming de m�
 - [Scripts Disponíveis](#pt-scripts)
 - [Funcionalidades](#funcionalidades)
 - [Bibliotecas e Frameworks](#bibliotecas)
+- [Documentação](https://documenter.getpostman.com/view/13242412/Tz5p6dMa)
 
 <a id="requisitos"></a>
 ## Requisitos Básicos:
@@ -60,6 +61,8 @@ BCRYPT_COST = 12
 * Adicionar música à playlist escolhida
 * Listar todas as músicas da playlist escolhida
 
+Visite [MusiCatchers - Documentação](https://documenter.getpostman.com/view/13242412/Tz5p6dMa) para ver exemplos de requisições.
+
 <a id="bibliotecas"></a>
 ## Bibliotecas e Frameworks:
 * cors
@@ -85,6 +88,7 @@ An API with basic features of an music streaming website.
 - [Available Scripts](#scripts)
 - [Features](#features)
 - [Libs and Frameworks](#libs)
+- [Documentation](https://documenter.getpostman.com/view/13242412/Tz5p6dMa)
 
 <a id="requirements"></a>
 ## Minimum Requirements:
@@ -132,6 +136,8 @@ BCRYPT_COST = 12
 * Create playlist
 * Add track to a playlist
 * Display all tracks of an especific playlist
+
+Check out the [MusiCatchers - Documentation](https://documenter.getpostman.com/view/13242412/Tz5p6dMa) for requests examples.
 
 <a id="libs"></a>
 ## Libs and Frameworks:
