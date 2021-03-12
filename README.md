@@ -8,7 +8,7 @@ Trata-se de uma API com funcionalidades básicas de um site para streaming de m�
 
 <a name="pt-menu"></a>
 - [Requisitos Básicos](#requisitos)
-- [Instruções Gerais](#instrucoes)
+- [Primeiros Passos](#primeiros-passos)
 - [Scripts Disponíveis](#pt-scripts)
 - [Funcionalidades](#funcionalidades)
 - [Bibliotecas e Frameworks](#bibliotecas)
@@ -21,8 +21,8 @@ Trata-se de uma API com funcionalidades básicas de um site para streaming de m�
 * Typescript
 * MySQL
 
-<a id="instrucoes"></a>
-## Instruções Gerais:
+<a id="primeiros-passos"></a>
+## Primeiros Passos:
 * Clone esse repositório no diretório de sua escolha com o comando `git clone <url>`.
 * Abra o projeto na sua IDE favorita.
 * Rode o comando `npm install` **ou** `npm i` para instalar as dependências do projeto.
@@ -47,7 +47,9 @@ BCRYPT_COST = 12
 * `npm run tables` para criar as tabelas.
 * `npm run populate` para popular a tabela de gêneros musicais.
 * `npm run test` para rodar os cases de teste.
-* `npm run dev` para iniciar a aplicação com hot reload.
+* `npm run start` para iniciar a aplicação.
+* `npm run dev` para iniciar a aplicação em modo de desenvolvimento, com hot reload.
+* `npm run build` para construir a aplicação para produção na pasta `build`.
 
 <a id="funcionalidades"></a>
 ## Funcionalidades:
@@ -85,7 +87,7 @@ An API with basic features of an music streaming website.
 
 <a name="pt-menu"></a>
 - [Minimum Requirements](#requirements)
-- [Instructions](#instructions)
+- [Getting Started](#getting-started)
 - [Available Scripts](#scripts)
 - [Features](#features)
 - [Libs and Frameworks](#libs)
@@ -98,8 +100,8 @@ An API with basic features of an music streaming website.
 * Typescript
 * MySQL
 
-<a id="instructions"></a>
-## Instructions:
+<a id="getting-started"></a>
+## Getting Started:
 * Clone this repository in a directory of your choice running `git clone <url>` command.
 * Open the project on your favorite IDE.
 * Run the `npm install` command **or** `npm i` to install all the dependencies.
@@ -124,7 +126,9 @@ BCRYPT_COST = 12
 * `npm run tables` to create tables.
 * `npm run populate` to populate the music genre table.
 * `npm run test` to run test cases.
-* `npm run dev` to start the application with hot reload.
+* `npm run start` to start the application.
+* `npm run dev` to start the application on development mode, with hot reload.
+* `npm run build` to build the aplication for production to the `build` folder.
 
 <a id="features"></a>
 ## Features:
